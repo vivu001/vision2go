@@ -52,6 +52,19 @@
           </div>
         </div>
       </div>
+
+       <!--RUN DEMO EJS-->
+      <% tours.forEach((tour) => { %>
+        <div class="col-lg-3 col-md-2 p-3">
+          <div class="card"> <img class="card-img-top" src="./img/150303_dfm_kampagnen_d077a3.jpg__1024x0_q90_crop_subsampling-2.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title"><%= tour.name %></h4>
+                <p class="card-title">Rate: <%= tour.rate %></p>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="#" class="btn btn-primary">Let's discover</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
     </div>
   </div>
 </div>

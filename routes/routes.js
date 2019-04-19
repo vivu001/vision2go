@@ -1,9 +1,47 @@
-module.exports = function (app, passport) {
+const mongoose = require('mongoose');
+const placeSchema = new mongoose.Schema({
+    lat: Number,
+    lang: Number,
+    name: String,
+    type: String
+});
+const placeModel = mongoose.model("Place", placeSchema);
 
+// create default places
+const p1 = new placeModel({lat: 1.0, lang: -22.0, name: "place_1", type: "square"});
+const p2 = new placeModel({lat: 18.3, lang: 25.3, name: "place_2", type: "pub"});
+const p3 = new placeModel({lat: -13.2, lang: -12.2, name: "place_3", type: "museum"});
+const p4 = new placeModel({lat: 20.44, lang: -92.2, name: "place_4", type: "station"});
+
+const tourSchema = new mongoose.Schema({
+    name: String,
+    places: [placeSchema],
+    rate: Number
+});
+const tourModel = mongoose.model("Tour", tourSchema);
+
+// create default tours
+const t1 = new tourModel({name: "Tour 1", places: [p1, p2], rate: 4.5});
+const t2 = new tourModel({name: "Tour 2", places: [p3, p4], rate: 5});
+// const defaultTours = [t1, t2];
+
+module.exports = function (app, passport) {
 //normal routes
     app.get('/', (req, res) => {
-        res.render('home', {
-            user: req.user, isLoggedIn: req.isAuthenticated()
+        tourModel.find({}, (err, foundTours) => {
+            // save tours to "Tour" (empty) inside the DB
+            if (foundTours.length === 0) {
+                tourModel.insertMany([t1, t2], (err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Successfully added defaultTours to DB");
+                    }
+                });
+            }
+            res.render('home', {
+                tours: foundTours, user: req.user, isLoggedIn: req.isAuthenticated()
+            });
         });
     });
 
