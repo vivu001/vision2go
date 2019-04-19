@@ -1,16 +1,41 @@
-module.exports = function(app, passport) {
+module.exports = function (app, passport) {
 
 //normal routes
     app.get('/', (req, res) => {
-        res.render('home');
+        res.render('home', {
+            user: req.user, isLoggedIn: req.isAuthenticated()
+        });
     });
 
     app.get('/about', (req, res) => {
-        res.render('about');
+        res.render('about', {
+            user: req.user, isLoggedIn: req.isAuthenticated()
+        });
     });
 
+    // ========== LOGOUT ==========
+    app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
+
+    // page Infos about ONE tour
     app.get('/tourInfos', (req, res) => {
-        res.render('tourInfos');
+        res.render('tourInfos', {
+            user: req.user, isLoggedIn: req.isAuthenticated()
+        });
+    });
+
+    app.get('/mytours', (req, res) => {
+        res.render('myTours', {
+            user: req.user, isLoggedIn: req.isAuthenticated()
+        });
+    });
+
+    app.get('/creatnewtour', (req, res) => {
+        res.render('createNewTour', {
+            user: req.user, isLoggedIn: req.isAuthenticated()
+        });
     });
 
 // =============================================================================
@@ -20,30 +45,30 @@ module.exports = function(app, passport) {
     // locally --------------------------------
     // LOGIN ===============================
     // show the login form
-    app.get('/loginPart', function(req, res) {
+    app.get('/loginPart', function (req, res) {
         // res.render('home', { message: req.flash('loginMessage') });
         res.redirect("/#loginPart");
     });
 
     // process the login form
     app.post('/loginPart', passport.authenticate('local-login', {
-        successRedirect : '/', // redirect to the secure profile section
-        failureRedirect : '/#loginPart', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
+        successRedirect: '/', // redirect to the secure profile section
+        failureRedirect: '/#loginPart', // redirect back to the signup page if there is an error
+        failureFlash: true // allow flash messages
     }));
 
     // SIGNUP =================================
     // show the signup form
-    app.get('/registerPart', function(req, res) {
+    app.get('/registerPart', function (req, res) {
         // res.render('home', { message: req.flash('signupMessage') });
         res.redirect("/#registerPart");
     });
 
     // process the signup form
     app.post('/registerPart', passport.authenticate('local-signup', {
-        successRedirect : '/', // redirect to the secure profile section
-        failureRedirect : '/#registerPart', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
+        successRedirect: '/', // redirect to the secure profile section
+        failureRedirect: '/#registerPart', // redirect back to the signup page if there is an error
+        failureFlash: true // allow flash messages
     }));
 
     /*
@@ -83,6 +108,9 @@ module.exports = function(app, passport) {
             successRedirect : '/profile',
             failureRedirect : '/'
         }));
+*/
+
+    /*
 
 // =============================================================================
 // AUTHORIZE (ALREADY LOGGED IN / CONNECTING OTHER SOCIAL ACCOUNT) =============
@@ -176,7 +204,10 @@ app.get('/unlink/google', isLoggedIn, function(req, res) {
     user.save(function(err) {
         res.redirect('/profile');
     });
-});*/
+});
+};
+*/
+
 };
 
 // route middleware to ensure user is logged in
