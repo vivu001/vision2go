@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 const placeSchema = new mongoose.Schema({
     lat: Number,
-    lang: Number,
+    lng: Number,
     name: String,
     type: String
 });
 const placeModel = mongoose.model("Place", placeSchema);
 
 // create default places
-const p1 = new placeModel({lat: 1.0, lang: -22.0, name: "place_1", type: "square"});
-const p2 = new placeModel({lat: 18.3, lang: 25.3, name: "place_2", type: "pub"});
-const p3 = new placeModel({lat: -13.2, lang: -12.2, name: "place_3", type: "museum"});
-const p4 = new placeModel({lat: 20.44, lang: -92.2, name: "place_4", type: "station"});
+const p1 = new placeModel({lat: 1.0, lng: -22.0, name: "place_1", type: "square"});
+const p2 = new placeModel({lat: 18.3, lng: 25.3, name: "place_2", type: "pub"});
+const p3 = new placeModel({lat: -13.2, lng: -12.2, name: "place_3", type: "museum"});
+const p4 = new placeModel({lat: 20.44, lng: -92.2, name: "place_4", type: "station"});
 
 const tourSchema = new mongoose.Schema({
     name: String,
