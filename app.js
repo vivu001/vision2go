@@ -25,7 +25,7 @@ app.set('view engine', 'ejs');
 
 // set up express application
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
+app.use(express.static("./"));
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 

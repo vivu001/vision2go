@@ -1,28 +1,18 @@
 const mongoose = require('mongoose');
-const placeSchema = new mongoose.Schema({
-    lat: Number,
-    lng: Number,
-    name: String,
-    type: String
-});
-const placeModel = mongoose.model("Place", placeSchema);
+
+const tour = require('../models/tour.js');
+const placeModel = tour.placeModel();
+const tourModel = tour.tourModel();
 
 // create default places
-const p1 = new placeModel({lat: 1.0, lng: -22.0, name: "place_1", type: "square"});
-const p2 = new placeModel({lat: 18.3, lng: 25.3, name: "place_2", type: "pub"});
-const p3 = new placeModel({lat: -13.2, lng: -12.2, name: "place_3", type: "museum"});
-const p4 = new placeModel({lat: 20.44, lng: -92.2, name: "place_4", type: "station"});
-
-const tourSchema = new mongoose.Schema({
-    name: String,
-    places: [placeSchema],
-    rate: Number
-});
-const tourModel = mongoose.model("Tour", tourSchema);
+const p1 = placeModel({name: "place_1", lat: 1.0, lng: -22.0, type: "square"});
+const p2 = placeModel({name: "place_2", lat: 18.3, lng: 25.3, type: "pub"});
+const p3 = placeModel({name: "place_3", lat: -13.2, lng: -12.2, type: "museum"});
+const p4 = placeModel({name: "place_4", lat: 20.44, lng: -92.2, type: "station"});
 
 // create default tours
-const t1 = new tourModel({name: "Tour 1", places: [p1, p2], rate: 4.5});
-const t2 = new tourModel({name: "Tour 2", places: [p3, p4], rate: 5});
+const t1 = tourModel({name: "Tour 1", places: [p1, p2], rate: 4.5});
+const t2 = tourModel({name: "Tour 2", places: [p3, p4], rate: 5});
 // const defaultTours = [t1, t2];
 
 module.exports = function (app, passport) {

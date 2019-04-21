@@ -1,7 +1,7 @@
 <%- include('partials/head') %>
 <%- include('partials/nav') %>
 
-<div class="py-5 text-center d-flex align-items-center border-primary" style="	background-image: url('./img/u_by_ephadearis_dak2qk4-pre.jpg');	background-size: 20;	background-position: center left;	background-repeat: repeat;	text-shadow: 0px 2px 12px grey;">
+<div class="py-5 text-center d-flex align-items-center border-primary" style="	background-image: url('/public/img/titleTheme.jpg');	background-size: 20;	background-position: center left;	background-repeat: repeat;	text-shadow: 0px 2px 12px grey;">
   <div class="container py-5" style="">
     <div class="row text-white">
       <div class="col-md-8 mx-auto" style="">
@@ -21,7 +21,7 @@
     </div>
     <div class="row">
       <div class="col-lg-3 col-md-2 p-3">
-        <div class="card"> <img class="card-img-top" src="./img/germany-dortmund-alter-markt-altes-stadthaus.jpg" alt="Card image cap">
+        <div class="card"> <img class="card-img-top" src="/public/img/germany-dortmund-alter-markt-altes-stadthaus.jpg" alt="Card image cap">
           <div class="card-body">
             <h4 class="card-title">Tour 1</h4>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="/tourInfos" class="btn btn-primary">Let's discover</a>
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="col-lg-3 col-md-2 p-3">
-        <div class="card"> <img class="card-img-top" src="./img/germany-dortmund-westfalenpark.jpg" alt="Card image cap">
+        <div class="card"> <img class="card-img-top" src="/public/img/germany-dortmund-westfalenpark.jpg" alt="Card image cap">
           <div class="card-body">
             <h4 class="card-title">Tour 2</h4>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="#" class="btn btn-primary">Let's discover</a>
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="col-lg-3 col-md-2 p-3">
-        <div class="card"> <img class="card-img-top" src="./img/istockphoto-500571126-612x612.jpg" alt="Card image cap">
+        <div class="card"> <img class="card-img-top" src="/public/img/istockphoto-500571126-612x612.jpg" alt="Card image cap">
           <div class="card-body">
             <h4 class="card-title">Shoppingtour</h4>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="#" class="btn btn-primary">Let's discover</a>
@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class="col-lg-3 col-md-2 p-3">
-        <div class="card"> <img class="card-img-top" src="./img/150303_dfm_kampagnen_d077a3.jpg__1024x0_q90_crop_subsampling-2.jpg" alt="Card image cap">
+        <div class="card"> <img class="card-img-top" src="/public/img/150303_dfm_kampagnen_d077a3.jpg__1024x0_q90_crop_subsampling-2.jpg" alt="Card image cap">
           <div class="card-body">
             <h4 class="card-title">Museumstour</h4>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="#" class="btn btn-primary">Let's discover</a>
@@ -56,7 +56,7 @@
        <!--RUN DEMO EJS-->
       <% tours.forEach((tour) => { %>
         <div class="col-lg-3 col-md-2 p-3">
-          <div class="card"> <img class="card-img-top" src="./img/150303_dfm_kampagnen_d077a3.jpg__1024x0_q90_crop_subsampling-2.jpg" alt="Card image cap">
+          <div class="card"> <img class="card-img-top" src="/public/img/150303_dfm_kampagnen_d077a3.jpg__1024x0_q90_crop_subsampling-2.jpg" alt="Card image cap">
             <div class="card-body">
                 <h4 class="card-title"><%= tour.name %></h4>
                 <p class="card-title">Rate: <%= tour.rate %></p>

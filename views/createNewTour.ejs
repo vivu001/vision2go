@@ -13,54 +13,30 @@
           <div class="p-2 order-2 order-md-1 col-lg-12">
               <h2 class="mb-3">Info</h2>
               <form>
-                  <div class="form-group"><input type="text" class="form-control" id="form44" placeholder="Tour name"> </div>
-                  <div class="form-group"><input type="text" class="form-control" id="form45" placeholder="Image"> </div>
+                  <div class="form-group"><input type="text" class="form-control" id="tourName" placeholder="Tour's name"> </div>
+                  <div class="form-group"><input type="text" class="form-control" id="tourImage" placeholder="Image"> </div>
                   <div class="input-group mb-3">
-                      <input type="text" class="form-control" placeholder="Places" aria-label="Places" aria-describedby="button-addon2">
+                      <input type="text" id="places" class="form-control" placeholder="Places" aria-label="Places" aria-describedby="button-addon2">
                       <div class="input-group-append">
                           <button class="btn btn-outline-secondary" type="button" id="button-addon2" data-toggle="modal" data-target="#addPlaceModal">+</button>
                       </div>
                   </div>
-                  <div class="modal fade" id="addPlaceModal" >
+                  <div class="modal fade" id="addPlaceModal">
                       <div class="modal-dialog" role="document">
                           <div class="modal-content">
                               <div class="modal-header" style="" >
                                   <h5 class="modal-title">Add a place</h5> <button type="button" class="close" data-dismiss="modal"> <span>×</span> </button>
                               </div>
                               <div class="modal-body">
-                                  <div class="form-group"><input type="text" class="form-control" id="form47" placeholder="Name of place"></div>
+                                  <div class="form-group"><input type="text" class="form-control" id="placeName"
+                                                                 placeholder="Name of place"></div>
                                   <div id="map" class="col-md-12"></div>
-                                  <script>
-                                      function initMap() {
-                                          let myLatLng = {lat: 51.517564, lng:  7.459443};
-
-                                          let map = new google.maps.Map(document.getElementById('map'), {
-                                              zoom: 14,
-                                              center: myLatLng
-                                          });
-
-                                          google.maps.event.addListener(map, 'click', (e) => {
-                                              let lat = e.latLng.lat();
-                                              let lng = e.latLng.lng();
-                                              alert("Lat= " + lat + "  Lng= " + lng);
-                                              $('#form27').val(lat);
-                                              $('#form28').val(lng);
-                                          });
-
-                                          let marker = new google.maps.Marker({
-                                              position: myLatLng,
-                                              map: map,
-                                              title: 'Welcome to Dortmund!'
-                                          });
-                                      }
-                                  </script>
-                                  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnKQaeuRspTV7_dKWC-xpCKZiUYn8qoM8&callback=initMap"
-                                          async defer></script>
-                                  <div class="form-group"><input type="number" class="form-control" id="form27" placeholder="Lat" > </div>
-                                  <div class="form-group"><input type="number" class="form-control" id="form28" placeholder="Lng"> </div>
-                                  <div class="form-group"><input type="text" class="form-control" id="form48" placeholder="Type"></div>
+                                  <div class="form-group"><input type="number" class="form-control" id="lat" placeholder="Lat" > </div>
+                                  <div class="form-group"><input type="number" class="form-control" id="lng" placeholder="Lng"> </div>
+                                  <div class="form-group"><input type="text" class="form-control" id="placeType"
+                                                                 placeholder="Type"></div>
                               </div>
-                              <div class="modal-footer"> <button type="button" class="btn btn-primary">Save place</button> <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> </div>
+                              <div class="modal-footer"> <button type="button" id="savePlace" class="btn btn-primary" data-dismiss="modal">Save place</button> <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> </div>
                           </div>
                       </div>
                   </div>

@@ -7575,3 +7575,24 @@ a.text-dark:hover, a.text-dark:focus {
   height: 350px;
   margin-bottom: 15px;
 }
+
+#toTopBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 15px; /* Place the button at the bottom of the page */
+  right: 15px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: mediumpurple; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 5px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+  opacity: .6;
+}
+
+#toTopBtn:hover {
+  background-color: lightcoral; /* Add a dark-grey background on hover */
+}
