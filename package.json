@@ -8,6 +8,7 @@
     "ejs": "latest",
     "express": "latest",
     "express-session": "^1.16.1",
+    "jquery": "^3.4.0",
     "mongoose": "^5.5.2",
     "passport": "^0.4.0"
   },

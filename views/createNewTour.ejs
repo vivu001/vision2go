@@ -12,11 +12,11 @@
       <div class="row">
           <div class="p-2 order-2 order-md-1 col-lg-12">
               <h2 class="mb-3">Info</h2>
-              <form>
-                  <div class="form-group"><input type="text" class="form-control" id="tourName" placeholder="Tour's name"> </div>
-                  <div class="form-group"><input type="text" class="form-control" id="tourImage" placeholder="Image"> </div>
+              <form action="/creatnewtour" method="post" novalidate>
+                  <div class="form-group"><input type="text" class="form-control" id="tourName" name="tourName" placeholder="Tour's name" required> </div>
+                  <div class="form-group"><input type="text" class="form-control" id="tourImage" name="tourImage" placeholder="Image"> </div>
                   <div class="input-group mb-3">
-                      <input type="text" id="places" class="form-control" placeholder="Places" aria-label="Places" aria-describedby="button-addon2">
+                      <input type="text" id="places" class="form-control" name="places" placeholder="Places" aria-label="Places" aria-describedby="button-addon2" required>
                       <div class="input-group-append">
                           <button class="btn btn-outline-secondary" type="button" id="button-addon2" data-toggle="modal" data-target="#addPlaceModal">+</button>
                       </div>
@@ -29,18 +29,21 @@
                               </div>
                               <div class="modal-body">
                                   <div class="form-group"><input type="text" class="form-control" id="placeName"
-                                                                 placeholder="Name of place"></div>
-                                  <div id="map" class="col-md-12"></div>
-                                  <div class="form-group"><input type="number" class="form-control" id="lat" placeholder="Lat" > </div>
-                                  <div class="form-group"><input type="number" class="form-control" id="lng" placeholder="Lng"> </div>
+                                                                 placeholder="Name of place" required></div>
+                                  <%- include('partials/map') %>
+                                  <div class="form-group"><input type="number" class="form-control" id="lat" placeholder="Lat" required> </div>
+                                  <div class="form-group"><input type="number" class="form-control" id="lng" placeholder="Lng" required> </div>
                                   <div class="form-group"><input type="text" class="form-control" id="placeType"
-                                                                 placeholder="Type"></div>
+                                                                 placeholder="Type" required></div>
                               </div>
                               <div class="modal-footer"> <button type="button" id="savePlace" class="btn btn-primary" data-dismiss="modal">Save place</button> <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> </div>
                           </div>
                       </div>
                   </div>
-                  <div class="form-group"> <textarea class="form-control" id="form46" rows="3" placeholder="My review"></textarea> </div> <button type="submit" class="btn btn-primary">Submit</button>
+                  <div class="form-group">
+                      <textarea class="form-control" id="myReview" name="review" rows="3" placeholder="My review ..."></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Create Tour</button>
               </form>
           </div>
       </div>

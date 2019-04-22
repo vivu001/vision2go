@@ -1,12 +1,5 @@
-<!--<div id="mapPart" class="py-3 bg-info">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12"><iframe width="100%" height="400" src="https://maps.google.com/maps?q=New%20York&amp;z=14&amp;output=embed" scrolling="no" frameborder="0"></iframe></div>
-        </div>
-    </div>
-</div>-->
-
 <div id="map" class="col-md-12"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnKQaeuRspTV7_dKWC-xpCKZiUYn8qoM8&callback=initMap" async defer></script>
 <script>
     function initMap() {
         let myLatLng = {lat: 51.517564, lng:  7.459443};
@@ -16,6 +9,14 @@
             center: myLatLng
         });
 
+        google.maps.event.addListener(map, 'click', (e) => {
+            let lat = e.latLng.lat();
+            let lng = e.latLng.lng();
+            // alert("Lat= " + lat + "  Lng= " + lng);
+            $('#lat').val(lat);
+            $('#lng').val(lng);
+        });
+
         let marker = new google.maps.Marker({
             position: myLatLng,
             map: map,
@@ -23,5 +24,3 @@
         });
     }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnKQaeuRspTV7_dKWC-xpCKZiUYn8qoM8&callback=initMap"
-        async defer></script>

@@ -1,18 +1,19 @@
-const mongoose = require('mongoose');
-
+// const myPlaces = require('../models/createTour.js');
 const tour = require('../models/tour.js');
 const placeModel = tour.placeModel();
 const tourModel = tour.tourModel();
 
+const sampleReview = "Some quick example text to build on the card title and make up the bulk of the card's content.";
+
 // create default places
-const p1 = placeModel({name: "place_1", lat: 1.0, lng: -22.0, type: "square"});
-const p2 = placeModel({name: "place_2", lat: 18.3, lng: 25.3, type: "pub"});
-const p3 = placeModel({name: "place_3", lat: -13.2, lng: -12.2, type: "museum"});
-const p4 = placeModel({name: "place_4", lat: 20.44, lng: -92.2, type: "station"});
+const p1 = placeModel({name: "place_1", lat: 1.0, lng: -22.0, type: "square", image: "imageURL"});
+const p2 = placeModel({name: "place_2", lat: 18.3, lng: 25.3, type: "pub", image: "imageURL"});
+const p3 = placeModel({name: "place_3", lat: -13.2, lng: -12.2, type: "museum", image: "imageURL"});
+const p4 = placeModel({name: "place_4", lat: 20.44, lng: -92.2, type: "station", image: "imageURL"});
 
 // create default tours
-const t1 = tourModel({name: "Tour 1", places: [p1, p2], rate: 4.5});
-const t2 = tourModel({name: "Tour 2", places: [p3, p4], rate: 5});
+const t1 = tourModel({name: "Tour_1", places: [p1, p2], rate: 4.5, review: sampleReview, image: "imageURL"});
+const t2 = tourModel({name: "Tour_2", places: [p3, p4], rate: 5, review: sampleReview, image: "imageURL"});
 // const defaultTours = [t1, t2];
 
 module.exports = function (app, passport) {
@@ -48,11 +49,26 @@ module.exports = function (app, passport) {
     });
 
     // page Infos about ONE tour
-    app.get('/tourInfos', (req, res) => {
-        res.render('tourInfos', {
-            user: req.user, isLoggedIn: req.isAuthenticated()
+   /* app.get('/:customTourName', (req, res) => {
+        const customTourName = req.params.customTourName.charAt(0).toUpperCase() +
+                                req.params.customTourName.slice(1).toLowerCase();
+        tourModel.findOne({name: customTourName}, (err, foundTour) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("ID : " + foundTour + " \n--- END ---\n");
+                /!*res.render('tourInfos', { tourName: foundTours[0].name, tourPlaces: foundTours[0].places, tourRate: foundTours[0].rate,
+                                            tourReview: foundTours[0].review, tourImage: foundTours[0].image,
+                                            user: req.user, isLoggedIn: req.isAuthenticated() });*!/
+                res.render('tourInfos', {tour: foundTour, user: req.user, isLoggedIn: req.isAuthenticated()});
+            }
         });
-    });
+    });*/
+    /* app.get('/tourInfos', (req, res) => {
+       res.render('tourInfos', {
+           user: req.user, isLoggedIn: req.isAuthenticated()
+       });
+   });*/
 
     app.get('/mytours', (req, res) => {
         res.render('myTours', {
@@ -64,6 +80,19 @@ module.exports = function (app, passport) {
         res.render('createNewTour', {
             user: req.user, isLoggedIn: req.isAuthenticated()
         });
+    });
+
+    app.post('/creatnewtour', (req, res) => {
+        const tourName = req.body.tourName;
+        const tourImage = req.body.tourImage;
+        // const tourPlaces = req.body.places;
+        /*const tourPlaces = require('/models/createTour.js');*/
+        const tourPlaces = [p2, p3];
+        const tourReview = req.body.review;
+
+        const newTour = tourModel({name: tourName, places: tourPlaces, rate: "2.5", review: tourReview, image: tourImage});
+        newTour.save();
+        res.redirect("/");
     });
 
 // =============================================================================
