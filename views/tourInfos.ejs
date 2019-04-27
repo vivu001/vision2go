@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 mx-auto">
-          <h1 class="mb-3">Tour X</h1>
+          <h1 class="mb-3"><%= tour.name %></h1>
           <%- include('partials/map') %>
           <!--<iframe width="100%" height="400" src="https://maps.google.com/maps?q=New%20York&amp;z=14&amp;output=embed" scrolling="no" frameborder="0"></iframe>-->
         </div>
@@ -67,17 +67,17 @@
     <% if (i % 2 == 0) { %>
         <div class="py-5 border-warning bg-light">
     <% } else { %>
-            <div class="py-5 bg-info" style="">
-    <% } %>
-      <div class="container">
-        <div class="row">
-          <div class="px-lg-5 d-flex flex-column justify-content-center col-lg-6">
-            <h1><%= place.name %></h1>
-            <p class="mb-3 lead"><%= place.review %></p>
-          </div>
-          <div class="col-lg-6"> <img class="img-fluid d-block" src="/public/img/dortmunder-u_pascal-amos-rest_web_content_mobile.jpg"> </div>
+    <div class="py-5 bg-info" style="">
+        <% } %>
+        <div class="container">
+            <div class="row">
+                <div class="px-lg-5 d-flex flex-column justify-content-center col-lg-6">
+                    <h1><%= place.name %></h1>
+                    <p class="mb-3 lead"><%= place.review %></p>
+                </div>
+                <div class="col-lg-6"><img class="img-fluid d-block" src="/public/img/dortmunder-u_pascal-amos-rest_web_content_mobile.jpg"> </div>
+            </div>
         </div>
-      </div>
     </div>
 <% }) %>
 

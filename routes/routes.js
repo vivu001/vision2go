@@ -1,4 +1,3 @@
-// const myPlaces = require('../models/createTour.js');
 const tour = require('../models/tour.js');
 const placeModel = tour.placeModel();
 const tourModel = tour.tourModel();
@@ -48,51 +47,51 @@ module.exports = function (app, passport) {
         res.redirect('/');
     });
 
-    // page Infos about ONE tour
-   /* app.get('/:customTourName', (req, res) => {
-        const customTourName = req.params.customTourName.charAt(0).toUpperCase() +
-                                req.params.customTourName.slice(1).toLowerCase();
-        tourModel.findOne({name: customTourName}, (err, foundTour) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log("ID : " + foundTour + " \n--- END ---\n");
-                /!*res.render('tourInfos', { tourName: foundTours[0].name, tourPlaces: foundTours[0].places, tourRate: foundTours[0].rate,
-                                            tourReview: foundTours[0].review, tourImage: foundTours[0].image,
-                                            user: req.user, isLoggedIn: req.isAuthenticated() });*!/
-                res.render('tourInfos', {tour: foundTour, user: req.user, isLoggedIn: req.isAuthenticated()});
-            }
-        });
-    });*/
-    /* app.get('/tourInfos', (req, res) => {
-       res.render('tourInfos', {
-           user: req.user, isLoggedIn: req.isAuthenticated()
-       });
-   });*/
-
     app.get('/mytours', (req, res) => {
         res.render('myTours', {
             user: req.user, isLoggedIn: req.isAuthenticated()
         });
     });
 
-    app.get('/creatnewtour', (req, res) => {
+    // page Infos about ONE tour
+    app.get('/mytours/:tourName', async (req, res) => {
+        const tourName = req.params.tourName.charAt(0).toUpperCase() +
+                                req.params.tourName.slice(1).toLowerCase();
+
+        // let foundTour = await tourModel.findOne({name: customTourName});
+        // console.log(foundTour);
+        // res.render('tourInfos', {tour: foundTour, user: req.user, isLoggedIn: req.isAuthenticated()});
+        tourModel.findOne({name: tourName}, (err, foundTour) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("ID : " + foundTour + " \n--- END ---\n");
+                /*res.render('tourInfos', { tourName: foundTours[0].name, tourPlaces: foundTours[0].places, tourRate: foundTours[0].rate,
+                                            tourReview: foundTours[0].review, tourImage: foundTours[0].image,
+                                            user: req.user, isLoggedIn: req.isAuthenticated() });*/
+                res.render('tourInfos', {tour: foundTour, user: req.user, isLoggedIn: req.isAuthenticated()});
+            }
+        });
+    });
+
+    app.get('/createnewtour', (req, res) => {
         res.render('createNewTour', {
             user: req.user, isLoggedIn: req.isAuthenticated()
         });
     });
 
-    app.post('/creatnewtour', (req, res) => {
-        const tourName = req.body.tourName;
+    app.post('/createnewtour', (req, res) => {
+        const tourName = req.body.tourName.charAt(0).toUpperCase() +
+                         req.body.tourName.slice(1).toLowerCase();
         const tourImage = req.body.tourImage;
         // const tourPlaces = req.body.places;
-        /*const tourPlaces = require('/models/createTour.js');*/
+        /*const tourPlaces = require('/models/createPlaces.js');*/
         const tourPlaces = [p2, p3];
         const tourReview = req.body.review;
 
         const newTour = tourModel({name: tourName, places: tourPlaces, rate: "2.5", review: tourReview, image: tourImage});
         newTour.save();
-        res.redirect("/");
+        res.redirect("/mytours/" + tourName);
     });
 
 // =============================================================================

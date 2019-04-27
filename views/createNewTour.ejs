@@ -12,7 +12,7 @@
       <div class="row">
           <div class="p-2 order-2 order-md-1 col-lg-12">
               <h2 class="mb-3">Info</h2>
-              <form action="/creatnewtour" method="post" novalidate>
+              <form action="/createnewtour" method="post" novalidate>
                   <div class="form-group"><input type="text" class="form-control" id="tourName" name="tourName" placeholder="Tour's name" required> </div>
                   <div class="form-group"><input type="text" class="form-control" id="tourImage" name="tourImage" placeholder="Image"> </div>
                   <div class="input-group mb-3">
@@ -37,6 +37,58 @@
                                                                  placeholder="Type" required></div>
                               </div>
                               <div class="modal-footer"> <button type="button" id="savePlace" class="btn btn-primary" data-dismiss="modal">Save place</button> <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> </div>
+                              <script>
+                                  // create an array of added places
+                                  const addedPlaces = [];
+
+                                  // handle click "save Place" button
+                                  $('#savePlace').click(() => {
+                                      if (areFilledFields()) {
+                                          let placesNameList = "";
+                                          let newPlace = {
+                                              name: $("#placeName").val(),
+                                              lat: $("#lat").val(),
+                                              lng: $("#lng").val(),
+                                              type: $("#placeType").val()
+                                          };
+
+                                          /* let newPlace = placeModel({
+                                               name: $("#placeName").val(), lat: $("#lat").val(), lng: $("#lng").val(),
+                                               type: $("#placeType").val(), image: "imageURL"});*/
+                                          alert("Successfully added: " + newPlace.name);
+
+                                          addedPlaces.push(newPlace);
+                                          addedPlaces.forEach((place) => {
+                                              if (placesNameList === "") {
+                                                  placesNameList = place.name;
+                                              } else {
+                                                  placesNameList += ", " + place.name;
+                                              }
+                                          });
+                                          // add names of places to form in page "Creat a new tour"
+                                          $("#places").val(placesNameList);
+                                          modalReset();
+                                      } else {
+                                          alert("All fields must be filled in !");
+                                      }
+                                  });
+
+                                  // check if all fields are filled
+                                  function areFilledFields() {
+                                      return ($("#placeName").val() && $("#lat").val() &&
+                                          $("#lng").val() && $("#placeType").val());
+                                  }
+
+                                  // clear forms of Modal Pop-up
+                                  function modalReset() {
+                                      $("#placeName").val('');
+                                      $("#lat").val('');
+                                      $("#lng").val('');
+                                      $("#placeType").val('');
+                                  }
+
+                                  exports = addedPlaces;
+                              </script>
                           </div>
                       </div>
                   </div>
