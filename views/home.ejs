@@ -20,48 +20,13 @@
       </div>
     </div>
     <div class="row">
-      <!--SAMPLE TOURS-->
-      <div class="col-lg-3 col-md-2 p-3">
-        <div class="card"> <img class="card-img-top" src="/public/img/germany-dortmund-alter-markt-altes-stadthaus.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">Tour 1</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="/tourInfos" class="btn btn-primary">Let's discover</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-2 p-3">
-        <div class="card"> <img class="card-img-top" src="/public/img/germany-dortmund-westfalenpark.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">Tour 2</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="#" class="btn btn-primary">Let's discover</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-2 p-3">
-        <div class="card"> <img class="card-img-top" src="/public/img/istockphoto-500571126-612x612.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">Shoppingtour</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="#" class="btn btn-primary">Let's discover</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-2 p-3">
-        <div class="card"> <img class="card-img-top" src="/public/img/150303_dfm_kampagnen_d077a3.jpg__1024x0_q90_crop_subsampling-2.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">Museumstour</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="#" class="btn btn-primary">Let's discover</a>
-          </div>
-        </div>
-      </div>
-
-       <!-- MY TOURS-->
-      <% tours.forEach((tour) => { %>
+      <!--SUGGESTED TOURS-->
+      <% suggestedTours.forEach((tour) => { %>
         <div class="col-lg-3 col-md-2 p-3">
-          <div class="card"> <img class="card-img-top" src="/public/img/150303_dfm_kampagnen_d077a3.jpg__1024x0_q90_crop_subsampling-2.jpg" alt="Card image cap">
+          <div class="card"> <img class="card-img-top" src="<%= tour.imageURL %>" alt="Card image cap">
             <div class="card-body">
-                <h4 class="card-title"><%= tour.name %></h4>
-                <p class="card-title">Rate: <%= tour.rate %></p>
-                <p class="card-text"><%= tour.review %></p> <a href="/<%=tour.name%>" class="btn btn-primary">Let's discover</a>
+              <h4 class="card-title"><%= tour.name %></h4>
+              <p class="card-text"><%= tour.review %></p> <a href="/mytours/<%= tour.name %>" class="btn btn-primary">Let's discover</a>
             </div>
           </div>
         </div>
@@ -90,7 +55,7 @@
   </div>
 
   <!--REGISTER-->
-  <div class="py-5">
+  <div class="py-3">
     <div class="container">
       <div class="row">
         <div class="col-md-12">

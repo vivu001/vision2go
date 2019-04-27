@@ -1,40 +1,30 @@
 <%- include('partials/head') %>
 <%- include('partials/nav') %>
 
-<div class="text-center m-0 py-2">
+<div class="text-center m-0 py-3">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12"><a class="btn text-center btn-warning border border-success" href="/createnewtour">Creat a new tour</a></div>
-      </div>
-    </div>
-  </div>
-  <div class="py-5 text-dark">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card"> <img class="card-img-top" src="https://static.pingendo.com/cover-moon.svg" alt="Card image cap">
-            <div class="card-body">
-              <h4 class="card-title">My First Tour</h4>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="/tourInfos" class="btn btn-primary">Let's discover</a>
-            </div>
-          </div>
+        <div class="row">
+            <div class="col-md-12"><a class="btn text-center btn-warning border border-success" href="/createnewtour">Creat a new tour</a></div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="py-5 bg-dark" data-pingendo-transient="">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card"> <img class="card-img-top" src="https://static.pingendo.com/cover-moon.svg" alt="Card image cap">
-            <div class="card-body">
-              <h4 class="card-title">My n-th Tour</h4>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="#" class="btn btn-primary">Let's discover</a>
+</div>
+<% tours.forEach((tour) => { %>
+    <div class="py-3 text-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card"><img class="card-img-top" src="<%= tour.imageURL %>"
+                                           alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title"><%= tour.name %></h4>
+                            <p class="card-text"><%= tour.review %></p>
+                            <a href="/mytours/<%= tour.name %>" class="btn btn-primary">Let's discover</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
+<% }) %>
 
 <%- include('partials/footer') %>

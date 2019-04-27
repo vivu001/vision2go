@@ -5,14 +5,17 @@ const tourModel = tour.tourModel();
 const sampleReview = "Some quick example text to build on the card title and make up the bulk of the card's content.";
 
 // create default places
-const p1 = placeModel({name: "place_1", lat: 1.0, lng: -22.0, type: "square", image: "imageURL"});
-const p2 = placeModel({name: "place_2", lat: 18.3, lng: 25.3, type: "pub", image: "imageURL"});
-const p3 = placeModel({name: "place_3", lat: -13.2, lng: -12.2, type: "museum", image: "imageURL"});
-const p4 = placeModel({name: "place_4", lat: 20.44, lng: -92.2, type: "station", image: "imageURL"});
+const p1 = placeModel({name: "place_1", lat: 1.0, lng: -22.0, type: "square", imagePlaceURL: "/public/img/germany-dortmund-haus-rodenberg.jpg"});
+const p2 = placeModel({name: "place_2", lat: 18.3, lng: 25.3, type: "pub", imagePlaceURL: "/public/img/dortmunder-u_pascal-amos-rest_web_content_mobile.jpg"});
+const p3 = placeModel({name: "place_3", lat: -13.2, lng: -12.2, type: "museum", imagePlaceURL: "/public/img/germany-dortmund-port-authority.jpg"});
+const p4 = placeModel({name: "place_4", lat: 20.44, lng: -92.2, type: "station", imagePlaceURL: "/public/img/germany-dortmund-st-reinolds-church-2.jpg"});
 
 // create default tours
-const t1 = tourModel({name: "Tour_1", places: [p1, p2], rate: 4.5, review: sampleReview, image: "imageURL"});
-const t2 = tourModel({name: "Tour_2", places: [p3, p4], rate: 5, review: sampleReview, image: "imageURL"});
+const t1 = tourModel({name: "Museumstour", places: [p1, p2], rate: 4.5, review: sampleReview, imageURL: "/public/img/germany-dortmund-alter-markt-altes-stadthaus.jpg"});
+const t2 = tourModel({name: "Radtour", places: [p3, p4], rate: 5, review: sampleReview, imageURL: "/public/img/germany-dortmund-westfalenpark.jpg"});
+const t3 = tourModel({name: "Shoppingtour", places: [p1, p4], rate: 5, review: sampleReview, imageURL: "/public/img/istockphoto-500571126-612x612.jpg"});
+const t4 = tourModel({name: "Footballtour", places: [p2, p4], rate: 5, review: sampleReview, imageURL: "/public/img/150303_dfm_kampagnen_d077a3.jpg__1024x0_q90_crop_subsampling-2.jpg"});
+
 // const defaultTours = [t1, t2];
 
 module.exports = function (app, passport) {
@@ -21,7 +24,7 @@ module.exports = function (app, passport) {
         tourModel.find({}, (err, foundTours) => {
             // save tours to "Tour" (empty) inside the DB
             if (foundTours.length === 0) {
-                tourModel.insertMany([t1, t2], (err) => {
+                tourModel.insertMany([t1, t2, t3, t4], (err) => {
                     if (err) {
                         console.log(err);
                     } else {
@@ -29,9 +32,7 @@ module.exports = function (app, passport) {
                     }
                 });
             }
-            res.render('home', {
-                tours: foundTours, user: req.user, isLoggedIn: req.isAuthenticated()
-            });
+            res.render('home', { suggestedTours: [t1,t2, t3, t4], tours: foundTours, user: req.user, isLoggedIn: req.isAuthenticated()});
         });
     });
 
@@ -48,27 +49,25 @@ module.exports = function (app, passport) {
     });
 
     app.get('/mytours', (req, res) => {
-        res.render('myTours', {
-            user: req.user, isLoggedIn: req.isAuthenticated()
+        tourModel.find({}, (err, foundTours) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render('myTours', {tours: foundTours, user: req.user, isLoggedIn: req.isAuthenticated()
+                });
+            }
         });
     });
 
     // page Infos about ONE tour
-    app.get('/mytours/:tourName', async (req, res) => {
+    app.get('/mytours/:tourName', (req, res) => {
         const tourName = req.params.tourName.charAt(0).toUpperCase() +
                                 req.params.tourName.slice(1).toLowerCase();
 
-        // let foundTour = await tourModel.findOne({name: customTourName});
-        // console.log(foundTour);
-        // res.render('tourInfos', {tour: foundTour, user: req.user, isLoggedIn: req.isAuthenticated()});
         tourModel.findOne({name: tourName}, (err, foundTour) => {
             if (err) {
                 console.log(err);
             } else {
-                console.log("ID : " + foundTour + " \n--- END ---\n");
-                /*res.render('tourInfos', { tourName: foundTours[0].name, tourPlaces: foundTours[0].places, tourRate: foundTours[0].rate,
-                                            tourReview: foundTours[0].review, tourImage: foundTours[0].image,
-                                            user: req.user, isLoggedIn: req.isAuthenticated() });*/
                 res.render('tourInfos', {tour: foundTour, user: req.user, isLoggedIn: req.isAuthenticated()});
             }
         });
@@ -81,17 +80,20 @@ module.exports = function (app, passport) {
     });
 
     app.post('/createnewtour', (req, res) => {
-        const tourName = req.body.tourName.charAt(0).toUpperCase() +
-                         req.body.tourName.slice(1).toLowerCase();
-        const tourImage = req.body.tourImage;
-        // const tourPlaces = req.body.places;
-        /*const tourPlaces = require('/models/createPlaces.js');*/
-        const tourPlaces = [p2, p3];
+        const tourName = req.body.name.charAt(0).toUpperCase() +
+                         req.body.name.slice(1).toLowerCase();
+        const tourImage = req.body.imageURL;
         const tourReview = req.body.review;
 
-        const newTour = tourModel({name: tourName, places: tourPlaces, rate: "2.5", review: tourReview, image: tourImage});
+        let tourPlaces = [];
+        const addedPlaces = req.body.places;
+        addedPlaces.forEach((place) => {
+            const placeToModel = placeModel({name: place.name, lat: place.lat, lng: place.lng, type: place.type, imageURL: "NoPlaceImage"});
+            tourPlaces.push(placeToModel);
+        });
+
+        const newTour = tourModel({name: tourName, places: tourPlaces, rate: "2.5", review: tourReview, imageURL: tourImage});
         newTour.save();
-        res.redirect("/mytours/" + tourName);
     });
 
 // =============================================================================

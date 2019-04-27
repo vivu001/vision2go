@@ -2,11 +2,11 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnKQaeuRspTV7_dKWC-xpCKZiUYn8qoM8&callback=initMap" async defer></script>
 <script>
     function initMap() {
-        let myLatLng = {lat: 51.517564, lng:  7.459443};
+        let myDefaultLatLng = {lat: 51.517564, lng:  7.459443};
 
         let map = new google.maps.Map(document.getElementById('map'), {
             zoom: 14,
-            center: myLatLng
+            center: myDefaultLatLng
         });
 
         google.maps.event.addListener(map, 'click', (e) => {
@@ -18,7 +18,7 @@
         });
 
         let marker = new google.maps.Marker({
-            position: myLatLng,
+            position: myDefaultLatLng,
             map: map,
             title: 'Welcome to Dortmund!'
         });
