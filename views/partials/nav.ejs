@@ -1,13 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark border-bottom border-primary">
     <div class="container">
-        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="/">
-            <b> Vision2GO</b>
-            <!--<i class="fa fa-magnet" aria-hidden="true"></i>-->
-        </a>
-        <div class="collapse navbar-collapse" id="navbar12">
+        <a class="navbar-brand" href="/"><b> Vision2GO</b></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar12">
+            <span class="navbar-toggler-icon" ></span> </button>
+        <div class="collapse navbar-collapse text-center justify-content-end" id="navbar12">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item"> <a class="nav-link" href="/#dortmundInfo">Tours</a> </li>
                 <%if (isLoggedIn) { %>
@@ -23,6 +19,7 @@
                 </ul>
             <% } else { %>
                 <ul class="navbar-nav">
+                    <!--<img src="https://img.icons8.com/office/22/000000/gender-neutral-user.png">-->
                     <li class="nav-item"> <a class="nav-link" href="/#loginPart">Log in</a> </li>
                     <li class="nav-item"> <a class="nav-link text-primary" href="/#registerPart">Register</a> </li>
                 </ul>
