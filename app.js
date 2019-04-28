@@ -30,12 +30,14 @@ app.use(express.static("./"));
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 
+mongoose.connect(configDB.url, { useNewUrlParser: true });
+
 // required for passport
 app.use(session({
-    secret: 'vision2go', // session secret
-    store: new MongoStore({mongooseConnection: mongoose.connect(configDB.url, { useNewUrlParser: true })}),
+    secret: 'ilovescotchscotchyscotchscotch', // session secret
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new MongoStore({mongooseConnection: mongoose.connection})
 }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions

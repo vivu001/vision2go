@@ -20,20 +20,30 @@ const t4 = tourModel({name: "Footballtour", places: [p2, p4], rate: 5, review: s
 
 module.exports = function (app, passport) {
 //normal routes
-    app.get('/', (req, res) => {
-        tourModel.find({}, (err, foundTours) => {
-            // save tours to "Tour" (empty) inside the DB
-            if (foundTours.length === 0) {
-                tourModel.insertMany([t1, t2, t3, t4], (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log("Successfully added defaultTours to DB");
-                    }
+    app.get('/', async (req, res) => {
+        try {
+            tourModel.find({}, (err, foundTours) => {
+                // save tours to "Tour" (empty) inside the DB
+                if (foundTours.length === 0) {
+                    tourModel.insertMany([t1, t2, t3, t4], (err) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log("Successfully added defaultTours to DB");
+                        }
+                    });
+                }
+                res.render('home', {
+                    suggestedTours: [t1, t2, t3, t4],
+                    tours: foundTours,
+                    user: req.user,
+                    isLoggedIn: req.isAuthenticated()
                 });
-            }
-            res.render('home', { suggestedTours: [t1,t2, t3, t4], tours: foundTours, user: req.user, isLoggedIn: req.isAuthenticated()});
-        });
+            });
+        } catch (err) {
+            res.status(error.response.status);
+            return res.send(error.message);
+        }
     });
 
     app.get('/about', (req, res) => {
