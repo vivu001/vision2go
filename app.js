@@ -11,11 +11,11 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require("body-parser");
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+// const MongoStore = require('connect-mongo')(session);
 
 const configDB = require('./controllers/database.js');
 // ====================== connect to database ======================
-// mongoose.connect(configDB.url, { useNewUrlParser: true });
+mongoose.connect(configDB.url, { useNewUrlParser: true });
 
 // pass passport for configuration
 const passportController = require('./controllers/passport');
@@ -30,14 +30,14 @@ app.use(express.static("./"));
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 
-mongoose.connect(configDB.url, { useNewUrlParser: true });
+// mongoose.connect(configDB.url, { useNewUrlParser: true });
 
 // required for passport
 app.use(session({
     secret: 'ilovescotchscotherochyscotchscotch', // session secret
     resave: true,
-    saveUninitialized: true,
-    store: new MongoStore({mongooseConnection: mongoose.connection})
+    saveUninitialized: true
+    /*store: new MongoStore({mongooseConnection: mongoose.connection})*/
 }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
