@@ -14,7 +14,6 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
 const configDB = require('./controllers/database.js');
-let dbURI = configDB.url;
 // ====================== connect to database ======================
 // mongoose.connect(configDB.url, { useNewUrlParser: true });
 
@@ -31,10 +30,7 @@ app.use(express.static("./"));
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 
-if (process.env.NODE_ENV === 'production') {
-    dbURI = process.env.MONGOLAB_URI;
-}
-mongoose.connect(dbURI, { useNewUrlParser: true });
+mongoose.connect(configDB.url, { useNewUrlParser: true });
 
 // required for passport
 app.use(session({
