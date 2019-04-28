@@ -10,6 +10,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require("body-parser");
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 const configDB = require('./controllers/database.js');
 
@@ -31,7 +32,8 @@ app.use(cookieParser()); // read cookies (needed for auth)
 
 // required for passport
 app.use(session({
-    secret: 'ilovescotchscotchyscotchscotch', // session secret
+    secret: 'vision2go', // session secret
+    store: new MongoStore(options),
     resave: true,
     saveUninitialized: true
 }));
