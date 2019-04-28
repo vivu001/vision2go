@@ -1,6 +1,7 @@
 const express = require("express");
 const ejs = require("ejs");
 const app = express();
+const port = process.env.PORT || 5000;
 const mongoose = require('mongoose');
 
 const passport = require('passport');
@@ -13,7 +14,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
 const configDB = require('./controllers/database.js');
-
+let dbURI = configDB.url;
 // ====================== connect to database ======================
 // mongoose.connect(configDB.url, { useNewUrlParser: true });
 
@@ -30,11 +31,14 @@ app.use(express.static("./"));
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 
-mongoose.connect(configDB.url, { useNewUrlParser: true });
+if (process.env.NODE_ENV === 'production') {
+    dbURI = process.env.MONGOLAB_URI;
+}
+mongoose.connect(dbURI, { useNewUrlParser: true });
 
 // required for passport
 app.use(session({
-    secret: 'ilovescotchscotchyscotchscotch', // session secret
+    secret: 'ilovescotchscotherochyscotchscotch', // session secret
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({mongooseConnection: mongoose.connection})
@@ -48,6 +52,6 @@ const router = require('./routes/routes.js');
 router(app, passport);
 
 // ====================== launch server ======================
-app.listen(5000, () => {
-    console.log("Server ist running on port 5000");
+app.listen(port, () => {
+    console.log(`Server ist running on port ${5000}`);
 });
