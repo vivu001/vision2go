@@ -15,7 +15,7 @@ const MongoStore = require('connect-mongo')(session);
 const configDB = require('./controllers/database.js');
 
 // ====================== connect to database ======================
-mongoose.connect(configDB.url, { useNewUrlParser: true });
+// mongoose.connect(configDB.url, { useNewUrlParser: true });
 
 // pass passport for configuration
 const passportController = require('./controllers/passport');
@@ -33,7 +33,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 // required for passport
 app.use(session({
     secret: 'vision2go', // session secret
-    store: new MongoStore(options),
+    store: new MongoStore({mongooseConnection: mongoose.connect(configDB.url, { useNewUrlParser: true })}),
     resave: true,
     saveUninitialized: true
 }));
