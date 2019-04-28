@@ -1,6 +1,9 @@
 {
   "name": "Vision2Go_Project",
   "version": "1.0.0",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "body-parser": "latest",
     "connect-flash": "^0.1.1",
