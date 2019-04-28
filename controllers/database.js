@@ -1,4 +1,5 @@
 // controllers/database.js
 module.exports = {
-    'url' : 'mongodb://localhost/DoodleClone' // looks like mongodb://<user>:<pass>@mongo.onmodulus.net:27017/Mikha4ot
+    'url' : 'mongodb://localhost/DoodleClone'
+    // 'url' : 'mongodb+srv://vision2go:fb4swt2@v2ocluster-lfznh.mongodb.net/dortmundTravel'
 };

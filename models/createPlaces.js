@@ -37,9 +37,11 @@ function sendTour() {
     const image = $('#tourImage').val();
     const review = $('#review').val();
     $.post("/createnewtour", {name: name, places: addedPlaces, review: review, imageURL: image});
+    const url = '/mytours/' + name;
+    console.log(url);           /* <---- Wichtig !!!*/
     $(document).ready(function () {
-        $(location).attr('href', '/mytours/' + name);
-    })
+        $(location).attr('href', url);
+    });
 }
 
 // check if all fields are filled
