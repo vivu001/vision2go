@@ -2,21 +2,67 @@ const tour = require('../models/tour.js');
 const placeModel = tour.placeModel();
 const tourModel = tour.tourModel();
 
-const sampleReview = "Some quick example text to build on the card title and make up the bulk of the card's content.";
+const sampleReview = "Some quick example text to build on the card title and make up the bulk of the card's content. Museum";
 
 // create default places
-const p1 = placeModel({name: "place_1", lat: 1.0, lng: -22.0, type: "square", imagePlaceURL: "/public/img/germany-dortmund-haus-rodenberg.jpg"});
-const p2 = placeModel({name: "place_2", lat: 18.3, lng: 25.3, type: "pub", imagePlaceURL: "/public/img/dortmunder-u_pascal-amos-rest_web_content_mobile.jpg"});
-const p3 = placeModel({name: "place_3", lat: -13.2, lng: -12.2, type: "museum", imagePlaceURL: "/public/img/germany-dortmund-port-authority.jpg"});
-const p4 = placeModel({name: "place_4", lat: 20.44, lng: -92.2, type: "station", imagePlaceURL: "/public/img/germany-dortmund-st-reinolds-church-2.jpg"});
+const p1 = placeModel({
+    name: "place_1",
+    lat: 1.0,
+    lng: -22.0,
+    type: "square",
+    placeImageURL: "/public/img/germany-dortmund-haus-rodenberg.jpg"
+});
+const p2 = placeModel({
+    name: "place_2",
+    lat: 18.3,
+    lng: 25.3,
+    type: "pub",
+    placeImageURL: "/public/img/dortmunder-u_pascal-amos-rest_web_content_mobile.jpg"
+});
+const p3 = placeModel({
+    name: "place_3",
+    lat: -13.2,
+    lng: -12.2,
+    type: "museum",
+    placeImageURL: "/public/img/germany-dortmund-port-authority.jpg"
+});
+const p4 = placeModel({
+    name: "place_4",
+    lat: 20.44,
+    lng: -92.2,
+    type: "station",
+    placeImageURL: "/public/img/germany-dortmund-st-reinolds-church-2.jpg"
+});
 
 // create default tours
-const t1 = tourModel({name: "Museumstour", places: [p1, p2], rate: 4.5, review: sampleReview, imageURL: "/public/img/germany-dortmund-alter-markt-altes-stadthaus.jpg"});
-const t2 = tourModel({name: "Radtour", places: [p3, p4], rate: 5, review: sampleReview, imageURL: "/public/img/germany-dortmund-westfalenpark.jpg"});
-const t3 = tourModel({name: "Shoppingtour", places: [p1, p4], rate: 5, review: sampleReview, imageURL: "/public/img/istockphoto-500571126-612x612.jpg"});
-const t4 = tourModel({name: "Footballtour", places: [p2, p4], rate: 5, review: sampleReview, imageURL: "/public/img/150303_dfm_kampagnen_d077a3.jpg__1024x0_q90_crop_subsampling-2.jpg"});
-
-// const defaultTours = [t1, t2];
+const t1 = tourModel({
+    name: "Museumstour",
+    places: [p1, p2],
+    rate: 4.5,
+    review: sampleReview,
+    tourImageURL: "/public/img/germany-dortmund-alter-markt-altes-stadthaus.jpg"
+});
+const t2 = tourModel({
+    name: "Radtour",
+    places: [p3, p4],
+    rate: 5,
+    review: sampleReview,
+    tourImageURL: "/public/img/germany-dortmund-westfalenpark.jpg"
+});
+const t3 = tourModel({
+    name: "Shoppingtour",
+    places: [p1, p4],
+    rate: 5,
+    review: sampleReview,
+    tourImageURL: "/public/img/istockphoto-500571126-612x612.jpg"
+});
+const t4 = tourModel({
+    name: "Footballtour",
+    places: [p2, p4],
+    rate: 5,
+    review: sampleReview,
+    tourImageURL: "/public/img/150303_dfm_kampagnen_d077a3.jpg__1024x0_q90_crop_subsampling-2.jpg"
+});
 
 module.exports = function (app, passport) {
 //normal routes
@@ -53,7 +99,7 @@ module.exports = function (app, passport) {
     });
 
     // ========== LOGOUT ==========
-    app.get('/logout', function(req, res) {
+    app.get('/logout', function (req, res) {
         req.logout();
         res.redirect('/');
     });
@@ -63,7 +109,8 @@ module.exports = function (app, passport) {
             if (err) {
                 console.log(err);
             } else {
-                res.render('myTours', {tours: foundTours, user: req.user, isLoggedIn: req.isAuthenticated()
+                res.render('myTours', {
+                    tours: foundTours, user: req.user, isLoggedIn: req.isAuthenticated()
                 });
             }
         });
@@ -72,7 +119,7 @@ module.exports = function (app, passport) {
     // page Infos about ONE tour
     app.get('/mytours/:tourName', (req, res) => {
         const tourName = req.params.tourName.charAt(0).toUpperCase() +
-                                req.params.tourName.slice(1).toLowerCase();
+            req.params.tourName.slice(1).toLowerCase();
 
         tourModel.findOne({name: tourName}, (err, foundTour) => {
             if (err) {
@@ -91,19 +138,37 @@ module.exports = function (app, passport) {
 
     app.post('/createnewtour', (req, res) => {
         const tourName = req.body.name.charAt(0).toUpperCase() +
-                         req.body.name.slice(1).toLowerCase();
+            req.body.name.slice(1).toLowerCase();
         const tourImage = req.body.imageURL;
         const tourReview = req.body.review;
 
         let tourPlaces = [];
         const addedPlaces = req.body.places;
         addedPlaces.forEach((place) => {
-            const placeToModel = placeModel({name: place.name, lat: place.lat, lng: place.lng, type: place.type, imageURL: "NoPlaceImage"});
+            const placeToModel = placeModel({
+                name: place.name, lat: place.lat, lng: place.lng,
+                type: place.type, placeImageURL: place.image
+            });
             tourPlaces.push(placeToModel);
         });
 
-        const newTour = tourModel({name: tourName, places: tourPlaces, rate: "2.5", review: tourReview, imageURL: tourImage});
+        const newTour = tourModel({
+            name: tourName,
+            places: tourPlaces,
+            rate: "2.5",
+            review: tourReview,
+            tourImageURL: tourImage
+        });
         newTour.save();
+    });
+
+    app.post('/search', async (req, res) => {
+        const keyword = req.body.keyword;
+        tourModel.find({ $or: [{name: {$regex: keyword, $options: "$i"}},
+                               {review: {$regex: keyword, $options: "$i"}}]},
+            (err, results) => {
+                res.render('foundPage', {tours: results, isLoggedIn: req.isAuthenticated()});
+        });
     });
 
 // =============================================================================

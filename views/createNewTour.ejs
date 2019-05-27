@@ -14,13 +14,14 @@
               <h2 class="mb-3">Info</h2>
               <form action='#' onsubmit="return sendTour();" novalidate>
                   <div class="form-group"><input type="text" class="form-control" id="tourName" name="tourName" placeholder="Tour's name" required> </div>
-                  <div class="form-group"><input type="text" class="form-control" id="tourImage" name="tourImage" placeholder="Image"> </div>
+<!--                  <div class="form-group"><input type="text" class="form-control" id="tourImage" name="tourImage" placeholder="Image"> </div>-->
                   <div class="input-group mb-3">
                       <input type="text" id="places" class="form-control" name="places" placeholder="Places" aria-label="Places" aria-describedby="button-addon2" required>
                       <div class="input-group-append">
                           <button class="btn btn-outline-secondary" type="button" id="button-addon2" data-toggle="modal" data-target="#addPlaceModal">+</button>
                       </div>
                   </div>
+                  <!--Modal-Popup to create a place-->
                   <div class="modal fade" id="addPlaceModal">
                       <div class="modal-dialog" role="document">
                           <div class="modal-content">
@@ -35,6 +36,8 @@
                                   <div class="form-group"><input type="number" class="form-control" id="lng" placeholder="Lng" required> </div>
                                   <div class="form-group"><input type="text" class="form-control" id="placeType"
                                                                  placeholder="Type" required></div>
+                                  <div class="form-group"><input type="text" class="form-control" id="placeImage" name="placeImage"
+                                                                 placeholder="Image URL" required></div>
                               </div>
                               <div class="modal-footer"> <button type="button" id="savePlace" class="btn btn-primary" data-dismiss="modal">Save place</button> <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> </div>
                           </div>

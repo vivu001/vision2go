@@ -6,7 +6,7 @@ const placeSchema = new mongoose.Schema({
     lat: Number,
     lng: Number,
     type: String,
-    imagePlaceURL: String
+    placeImageURL: String
 });
 // create Model of place
 const placeModel = mongoose.model("Place", placeSchema);
@@ -17,7 +17,7 @@ const tourSchema = new mongoose.Schema({
     places: [placeSchema],
     rate: Number, // Array<Number>
     review: String,
-    imageURL: String
+    tourImageURL: String
 });
 // create Model of tour
 const tourModel = mongoose.model("Tour", tourSchema);

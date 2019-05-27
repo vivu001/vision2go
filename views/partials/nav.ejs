@@ -6,14 +6,14 @@
         <div class="collapse navbar-collapse text-center justify-content-end" id="navbar12">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item"> <a class="nav-link" href="/#dortmundInfo">Tours</a> </li>
-                <%if (isLoggedIn) { %>
+                <% if (isLoggedIn) { %>
                     <li class="nav-item"> <a class="nav-link" href="/mytours">My Tours</a> </li>
                 <% } else { %>
                     <li class="nav-item"> <a class="nav-link" href="/#map">Map</a> </li>
                 <% } %>
                 <li class="nav-item"> <a class="nav-link" href="/about">About Us</a> </li>
             </ul>
-            <%if (isLoggedIn) { %>
+            <% if (isLoggedIn) { %>
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="/logout">Log out</a></li>
                 </ul>
@@ -28,3 +28,18 @@
     </div>
 </nav>
 <button onclick="topFunction()" id="toTopBtn" title="Go to top"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+
+<%if (isLoggedIn) { %>
+    <div class="col-md-12 m-1">
+        <form class="form-inline text-right justify-content-end" action="/search" method="post">
+            <div class="input-group">
+                <input type="text" class="form-control" id="inlineFormInputGroup" name="keyword" placeholder="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit" >
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+<% } %>

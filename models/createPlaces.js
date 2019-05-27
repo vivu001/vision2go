@@ -9,7 +9,8 @@ $('#savePlace').click(() => {
             name: $("#placeName").val(),
             lat: $("#lat").val(),
             lng: $("#lng").val(),
-            type: $("#placeType").val()
+            type: $("#placeType").val(),
+            image: $("#placeImage").val()
         };
 
         alert("Successfully added: " + newPlace.name);
@@ -33,12 +34,11 @@ $('#savePlace').click(() => {
 // send a added Tour to server : "/createnewtour"
 function sendTour() {
     const name = $("#tourName").val();
-    console.log(name);
-    const image = $('#tourImage').val();
+    const image = addedPlaces[0].image;
     const review = $('#review').val();
     $.post("/createnewtour", {name: name, places: addedPlaces, review: review, imageURL: image});
     const url = '/mytours/' + name;
-    console.log(url);           /* <---- Wichtig !!!*/
+    console.log(url);           /* <---- Important !!!*/
     $(document).ready(function () {
         $(location).attr('href', url);
     });
@@ -50,7 +50,7 @@ function areFilledFields() {
         $("#lng").val() && $("#placeType").val());
 }
 
-// clear forms of Modal Pop-up
+// clear form of Modal Pop-up
 function modalReset() {
     $("#placeName").val('');
     $("#lat").val('');

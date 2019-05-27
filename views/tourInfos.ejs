@@ -55,25 +55,31 @@
     </div>
 </div>
 
-
-<% tour.places.forEach((place, i) => { %>
-    <% if (i % 2 === 0) { %>
-<div class="py-4 border-warning bg-light">
-    <% } else { %>
-        <div class="py-4 bg-info">
-    <% } %>
-        <div class="container">
-            <div class="row">
-                <div class="px-lg-5 d-flex flex-column justify-content-center col-lg-6">
-                    <h3><%= place.name %></h3>
-                    <p class="mb-3 lead"><%= place.review %></p>
-                </div>
-                <div class="col-lg-6"><img class="img-fluid d-block" src="<%= place.imagePlaceURL %>"></div>
+<% tour.places.forEach((place) => { %>
+    <div class="container" style="background-color: white">
+        <div class="row">
+            <div class="p-4 col-lg-5 order-2 order-lg-1"><img class="img-fluid d-block" src="<%= place.placeImageURL %>"></div>
+            <div class="d-flex flex-column justify-content-center p-3 col-lg-7 order-1 order-lg-2">
+                <h3><%= place.name %></h3>
             </div>
         </div>
     </div>
     <hr>
-    <% }) %>
+<% }) %>
+
+<div class="container">
+    <div class="row">
+        <div class="p-0 col-lg-5 order-2 order-lg-1"><img class="img-fluid d-block"
+                                                          src="https://static.pingendo.com/cover-bubble-light.svg">
+        </div>
+        <div class="d-flex flex-column justify-content-center p-3 col-lg-7 order-1 order-lg-2">
+            <p class="lead mb-0" style="color: white">I should be incapable of drawing a single stroke at the present
+                moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems
+                with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my
+                trees, and but a few stray gleams steal into the inner sanctuary.</p>
+        </div>
+    </div>
+</div>
 </div>
 </div>
 </div>
