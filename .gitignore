@@ -1,3 +1,4 @@
+.idea
 node_modules
 about.html
 create_new_tour.html
@@ -8,4 +9,3 @@ styleguide.html
 tourInfos.html
 toursInfo_Logined.html
 toursInfo_noLogin.html
-
