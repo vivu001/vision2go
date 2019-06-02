@@ -6,31 +6,31 @@ const sampleReview = "Some quick example text to build on the card title and mak
 
 // create default places
 const p1 = placeModel({
-    name: "place_1",
+    name: "Haus Rodenberg",
     lat: 1.0,
     lng: -22.0,
-    type: "square",
+    type: "castle",
     placeImageURL: "/public/img/germany-dortmund-haus-rodenberg.jpg"
 });
 const p2 = placeModel({
-    name: "place_2",
+    name: "Museum Ostwall",
     lat: 18.3,
     lng: 25.3,
-    type: "pub",
+    type: "museum",
     placeImageURL: "/public/img/dortmunder-u_pascal-amos-rest_web_content_mobile.jpg"
 });
 const p3 = placeModel({
-    name: "place_3",
+    name: "Dortmund Port",
     lat: -13.2,
     lng: -12.2,
-    type: "museum",
+    type: "port",
     placeImageURL: "/public/img/germany-dortmund-port-authority.jpg"
 });
 const p4 = placeModel({
-    name: "place_4",
+    name: "St. Reinold's Church",
     lat: 20.44,
     lng: -92.2,
-    type: "station",
+    type: "church",
     placeImageURL: "/public/img/germany-dortmund-st-reinolds-church-2.jpg"
 });
 
@@ -40,7 +40,7 @@ const t1 = tourModel({
     places: [p1, p2],
     rate: 4.5,
     review: sampleReview,
-    tourImageURL: "/public/img/germany-dortmund-alter-markt-altes-stadthaus.jpg"
+    tourImageURL: "https://www.dortmund.de/media/bilder/pool/___allgemein_pool/Zeche_Zollern_II_DetailNormal_MD_LG.jpg"
 });
 const t2 = tourModel({
     name: "Radtour",

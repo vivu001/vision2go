@@ -35,7 +35,7 @@ $('#savePlace').click(() => {
 function sendTour() {
     const name = $("#tourName").val();
     const image = addedPlaces[0].image;
-    const review = $('#review').val();
+    const review = $("#myReview").val();
     $.post("/createnewtour", {name: name, places: addedPlaces, review: review, imageURL: image});
     const url = '/mytours/' + name;
     console.log(url);           /* <---- Important !!!*/
