@@ -10835,7 +10835,7 @@ a.text-dark:hover, a.text-dark:focus {
     margin-bottom: 40px;
 }
 
-#map {
+#map, #tourMap {
     width: auto;
     height: 350px;
     margin-bottom: 15px;

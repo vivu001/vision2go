@@ -7,8 +7,28 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h1 class="mb-3"><%= tour.name %></h1>
-                <%- include('partials/map') %>
-                <!--<iframe width="100%" height="400" src="https://maps.google.com/maps?q=New%20York&amp;z=14&amp;output=embed" scrolling="no" frameborder="0"></iframe>-->
+                <div id="tourMap" class="col-md-12"></div>
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnKQaeuRspTV7_dKWC-xpCKZiUYn8qoM8&callback=showMap"></script>
+                <script>
+                    const places = <%- JSON.stringify(tour.places) %>
+                        function showMap() {
+                            const myDefaultLatLng = {lat: 51.517564, lng: 7.459443};
+                            let map = new google.maps.Map(document.getElementById('tourMap'), {
+                                zoom: 11,
+                                center: myDefaultLatLng
+                            });
+
+                            places.forEach((place) => {
+                                let myPlaceLatLng = {lat: place.lat, lng: place.lng};
+                                let marker = new google.maps.Marker({
+                                    position: myPlaceLatLng,
+                                    map: map,
+                                    title: place.name
+                                });
+                            })
+                        }
+                </script>
             </div>
         </div>
     </div>
@@ -61,7 +81,8 @@
 <% tour.places.forEach((place) => { %>
     <div class="container" style="background-color: white">
         <div class="row">
-            <div class="p-4 col-lg-5 order-2 order-lg-1"><img class="img-fluid d-block" src="<%= place.placeImageURL %>"></div>
+            <div class="p-4 col-lg-5 order-2 order-lg-1"><img class="img-fluid d-block"
+                                                              src="<%= place.placeImageURL %>"></div>
             <div class="d-flex flex-column justify-content-center p-3 col-lg-7 order-1 order-lg-2">
                 <h3><%= place.name %></h3>
             </div>

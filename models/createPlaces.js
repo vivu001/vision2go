@@ -31,7 +31,7 @@ $('#savePlace').click(() => {
     }
 });
 
-// send a added Tour to server : "/createnewtour"
+// send an added Tour to server : "/createnewtour"
 function sendTour() {
     const name = $("#tourName").val();
     const image = addedPlaces[0].image;

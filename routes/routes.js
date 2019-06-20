@@ -7,29 +7,29 @@ const sampleReview = "Some quick example text to build on the card title and mak
 // create default places
 const p1 = placeModel({
     name: "Haus Rodenberg",
-    lat: 1.0,
-    lng: -22.0,
+    lat: 51.498197,
+    lng: 7.554465,
     type: "castle",
     placeImageURL: "/public/img/germany-dortmund-haus-rodenberg.jpg"
 });
 const p2 = placeModel({
     name: "Museum Ostwall",
-    lat: 18.3,
-    lng: 25.3,
+    lat: 51.515186,
+    lng: 7.453430,
     type: "museum",
     placeImageURL: "/public/img/dortmunder-u_pascal-amos-rest_web_content_mobile.jpg"
 });
 const p3 = placeModel({
     name: "Dortmund Port",
-    lat: -13.2,
-    lng: -12.2,
+    lat: 51.527326,
+    lng:  7.447878,
     type: "port",
     placeImageURL: "/public/img/germany-dortmund-port-authority.jpg"
 });
 const p4 = placeModel({
     name: "St. Reinold's Church",
-    lat: 20.44,
-    lng: -92.2,
+    lat: 51.515318,
+    lng: 7.468501,
     type: "church",
     placeImageURL: "/public/img/germany-dortmund-st-reinolds-church-2.jpg"
 });
