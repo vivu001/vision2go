@@ -1,17 +1,21 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark border-bottom border-primary">
     <div class="container">
         <a class="navbar-brand" href="/"><b> Vision2GO</b></a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar12">
-            <span class="navbar-toggler-icon" ></span> </button>
+        <% if (isLoggedIn) { %>
+            <img src="https://img.icons8.com/cotton/32/000000/search.png" onclick="showSearchBar()">
+        <% } %>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbar12">
+            <span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse text-center justify-content-end" id="navbar12">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item"> <a class="nav-link" href="/#dortmundInfo">Tours</a> </li>
+                <li class="nav-item"><a class="nav-link" href="/#dortmundInfo">Tours</a></li>
                 <% if (isLoggedIn) { %>
-                    <li class="nav-item"> <a class="nav-link" href="/mytours">My Tours</a> </li>
+                    <li class="nav-item"><a class="nav-link" href="/mytours">My Tours</a></li>
                 <% } else { %>
-                    <li class="nav-item"> <a class="nav-link" href="/#map">Map</a> </li>
+                    <li class="nav-item"><a class="nav-link" href="/#map">Map</a></li>
                 <% } %>
-                <li class="nav-item"> <a class="nav-link" href="/about">About Us</a> </li>
+                <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
             </ul>
             <% if (isLoggedIn) { %>
                 <ul class="navbar-nav">
@@ -20,22 +24,23 @@
             <% } else { %>
                 <ul class="navbar-nav">
                     <!--<img src="https://img.icons8.com/office/22/000000/gender-neutral-user.png">-->
-                    <li class="nav-item"> <a class="nav-link" href="/#loginPart">Log in</a> </li>
-                    <li class="nav-item"> <a class="nav-link text-primary" href="/#registerPart">Register</a> </li>
+                    <li class="nav-item"><a class="nav-link" href="/#loginPart">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link text-primary" href="/#registerPart">Register</a></li>
                 </ul>
             <% } %>
         </div>
     </div>
 </nav>
-<button onclick="topFunction()" id="toTopBtn" title="Go to top"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+<button onclick="topFunction()" id="toTopBtn" title="Go to top"><i class="fa fa-arrow-up" aria-hidden="true"></i>
+</button>
 
-<%if (isLoggedIn) { %>
-    <div class="col-md-12 m-1">
+<% if (isLoggedIn) { %>
+    <div class="col-md-12 m-1" id="searchBar" style="display: none">
         <form class="form-inline text-right justify-content-end" action="/search" method="post">
             <div class="input-group">
                 <input type="text" class="form-control" id="inlineFormInputGroup" name="keyword" placeholder="Search">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit" >
+                    <button class="btn btn-primary" type="submit">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </div>

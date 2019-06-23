@@ -4774,6 +4774,11 @@ input[type="button"].btn-block {
     color: #fff;
 }
 
+/*search Bar*/
+#searchBar {
+    display: none;
+}
+
 .card {
     position: relative;
     display: -ms-flexbox;
