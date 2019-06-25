@@ -228,7 +228,7 @@ module.exports = function (app, passport) {
     });
 
     app.post('/search', async (req, res) => {
-        const keyword = req.body.keyword;
+        const keyword = '.*' + req.body.keyword + '.*';
         tourModel.find({ $or: [{name: {$regex: keyword, $options: "$i"}}, {type: {$regex: keyword, $options: "$i"}},
                                {review: {$regex: keyword, $options: "$i"}}]},
             (err, results) => {
