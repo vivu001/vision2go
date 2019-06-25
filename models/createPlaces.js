@@ -10,7 +10,8 @@ $('#savePlace').click(() => {
             lat: $("#lat").val(),
             lng: $("#lng").val(),
             type: $("#placeType").val(),
-            image: $("#placeImage").val()
+            image: $("#placeImage").val(),
+            description: $("#placeDescription").val()
         };
 
         alert("Successfully added: " + newPlace.name);
@@ -34,9 +35,8 @@ $('#savePlace').click(() => {
 // send an added Tour to server : "/createnewtour"
 function sendTour() {
     const name = $("#tourName").val();
-    const image = addedPlaces[0].image;
     const review = $("#myReview").val();
-    $.post("/createnewtour", {name: name, places: addedPlaces, review: review, imageURL: image});
+    $.post("/createnewtour", {name: name, places: addedPlaces, review: review});
     const url = '/mytours/' + name;
     console.log(url);           /* <---- Important !!!*/
     $(document).ready(function () {
