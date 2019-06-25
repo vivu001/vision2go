@@ -1,106 +1,168 @@
 <%- include('partials/head') %>
 <%- include('partials/nav') %>
 
-<div class="py-5 text-center d-flex align-items-center border-primary" style="	background-image: url('/public/img/titleTheme.jpg');	background-size: 20;	background-position: center left;	background-repeat: repeat;	text-shadow: 0px 2px 12px grey;">
-  <div class="container py-5" style="">
-    <div class="row text-white">
-      <div class="col-md-8 mx-auto" style="">
-        <h1 class="mb-4 display-4 text-light" style="text-shadow: 0 0 14px green;">Dortmund Travel<br></h1>
-        <a href="#dortmundInfo" class="btn btn-lg btn-primary mx-1">Let's start</a>
-      </div>
+<div class="py-5 text-center d-flex align-items-center border-primary"
+     style="	background-image: url('/public/img/titleTheme.jpg');	background-size: 20;	background-position: center left;	background-repeat: repeat;	text-shadow: 0px 2px 12px grey;">
+    <div class="container py-5" style="">
+        <div class="row text-white">
+            <div class="col-md-8 mx-auto" style="">
+                <h1 class="mb-4 display-4 text-light" style="text-shadow: 0 0 14px green;">Dortmund Travel<br></h1>
+                <a href="#dortmundInfo" class="btn btn-lg btn-primary mx-1">Let's start</a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="py-3">
-  <div class="container">
-    <div class="row">
-      <div id="dortmundInfo" class="text-center mx-auto col-md-8">
-        <h1 class="mb-3 text-warning">Most popular tours</h1>
-        <p class="text-info justify-content-center text-center">Dortmund, the largest city in Westphalia, lies on the eastern edge of the Ruhr in the fertile Hellweg area. The city has long been the center of Germany's coal and steel industries, a heritage that's celebrated in a variety of excellent museums and attractions. Despite the importance of industry to the city, visitors are drawn here by its numerous open spaces and parks: half of the city is made up of wooded areas, farmland, and parks, as well as numerous waterways. Consequently, it's a pleasant city to explore on foot, with one of the highest densities of pedestrian-friendly city squares anywhere in Germany. Dortmund is also well known for its famous football team, Borussia Dortmund, founded in 1909. It's one of the most successful clubs in Europe and has the continent's biggest stadium and largest regular attendance. A museum, the Borusseum, celebrates their successes.</p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="py-2">
-  <div class="container">
-    <div class="row">
-      <!--SUGGESTED TOURS-->
-      <% suggestedTours.forEach((tour) => { %>
-        <div class="col-lg-3 col-md-6 p-3 hei">
-          <div class="card"> <img class="card-img-top" src="<%= tour.tourImageURL %>" alt="Card image cap">
-            <div class="card-body">
-              <h4 class="card-title"><%= tour.name %></h4>
-              <p class="card-text"><%= tour.review %></p>
-              <a href="/mytours/<%= tour.name %>" class="btn btn-primary">Let's discover</a>
+    <div class="container">
+        <div class="row">
+            <div id="dortmundInfo" class="text-center mx-auto col-md-8">
+                <h1 class="mb-3 text-warning">Most popular tours</h1>
+                <p class="text-info justify-content-center text-center">Dortmund, the largest city in Westphalia, lies
+                    on the eastern edge of the Ruhr in the fertile Hellweg area. The city has long been the center of
+                    Germany's coal and steel industries, a heritage that's celebrated in a variety of excellent museums
+                    and attractions. Despite the importance of industry to the city, visitors are drawn here by its
+                    numerous open spaces and parks: half of the city is made up of wooded areas, farmland, and parks, as
+                    well as numerous waterways. Consequently, it's a pleasant city to explore on foot, with one of the
+                    highest densities of pedestrian-friendly city squares anywhere in Germany. Dortmund is also well
+                    known for its famous football team, Borussia Dortmund, founded in 1909. It's one of the most
+                    successful clubs in Europe and has the continent's biggest stadium and largest regular attendance. A
+                    museum, the Borusseum, celebrates their successes.</p>
             </div>
-          </div>
         </div>
-      <% }) %>
     </div>
-  </div>
+</div>
+
+<div class="py-2">
+    <div class="container">
+        <div class="row">
+            <!--SUGGESTED TOURS-->
+            <% suggestedTours.forEach((tour) => { %>
+                <div class="col-lg-3 col-md-6 p-3 hei">
+                    <div class="card">
+                        <div id="carousel2" class="carousel slide" data-ride="carousel" data-interval="10000">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active"> <img class="card-img-top" src="<%= tour.places[0].placeImageURL %>" alt="Card image cap"> </div>
+                                <% tour.places.forEach((place, index) => { %>
+                                    <% if (index > 0) { %>
+                                        <div class="carousel-item"> <img class="card-img-top" src="<%= place.placeImageURL %>" alt="Card image cap"> </div>
+                                    <% } %>
+                                <% }) %>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title"><%= tour.name %></h4>
+                            <p class="card-text"><%= tour.review %></p>
+                            <a href="/mytours/<%= tour.name %>" class="btn btn-primary">Let's discover</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
 </div>
 
 <% if (!isLoggedIn) { %>
-  <!--LOG IN-->
-  <div id="loginPart" class="py-3 text-center bg-warning" style="">
-    <div class="container">
-      <div class="row">
-        <div class="mx-auto col-md-6 col-10 bg-white p-5">
-          <h1 class="mb-3">Log in</h1>
-          <form action="/loginPart" method="post" >
-            <div class="form-group"> <input type="email" name="loginEmail" class="form-control" placeholder="Enter Email" id="form9" required> </div>
-            <div class="form-group mb-3"> <input type="password" name="loginPassword" class="form-control" placeholder="Password" id="form10" required> <small class="form-text text-muted text-right">
-                <a href="#"> Forgot password?</a>
-              </small> </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!--REGISTER-->
-  <div class="py-3">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h5 class="text-white text-center rounded-left rounded-right rounded-top rounded-bottom border-left border-right border-top border-bottom border-light">OR&nbsp;</h5>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="registerPart" class="py-5 text-center bg-primary" style="	background-image: url(https://pingendo.com/site-assets/cover.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
-    <div class="container">
-      <div class="row">
-        <div class="mx-auto col-lg-6 col-10">
-          <h1>Sign Up</h1>
-          <form class="text-left" action="/registerPart" method="post">
-            <div class="form-group"> <label for="form16">Email</label> <input type="email" name="signinEmail" class="form-control" id="form16" placeholder="vision2go@gmail.com" required> </div>
-            <div class="form-row">
-              <div class="form-group col-md-6"> <label for="form19">Password</label> <input type="password" name="signinPassword" class="form-control" id="form19" placeholder="••••••••" required> </div>
-              <!--<div class="form-group col-md-6"> <label for="form20">Confirm Password</label> <input type="password" class="form-control" id="form20" placeholder="••••"> </div>-->
+    <!--LOG IN-->
+    <div id="loginPart" class="py-3 text-center bg-warning" style="">
+        <div class="container">
+            <div class="row">
+                <div class="mx-auto col-md-6 col-10 bg-white p-5">
+                    <h1 class="mb-3">Log in</h1>
+                    <form action="/loginPart" method="post">
+                        <div class="form-group"><input type="email" name="loginEmail" class="form-control"
+                                                       placeholder="Enter Email" id="form9" required></div>
+                        <div class="form-group mb-3"><input type="password" name="loginPassword" class="form-control"
+                                                            placeholder="Password" id="form10" required>
+                            <small class="form-text text-muted text-right">
+                                <a href="#"> Forgot password?</a>
+                            </small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                </div>
             </div>
-            <!--<div class="form-group">
-              <div class="form-check"> <input class="form-check-input" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21"> I Agree with <a href="#" class="text-danger">Term and Conditions</a> of the service </label> </div>
-            </div> -->
-            <button type="submit" class="btn btn-primary">Register</button>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
+
+    <!--REGISTER-->
+    <div class="py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="text-white text-center rounded-left rounded-right rounded-top rounded-bottom border-left border-right border-top border-bottom border-light">
+                        OR&nbsp;</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="registerPart" class="py-5 text-center bg-primary"
+         style="	background-image: url(https://pingendo.com/site-assets/cover.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="mx-auto col-lg-6 col-10">
+                    <h1>Sign Up</h1>
+                    <form class="text-left" action="/registerPart" method="post">
+                        <div class="form-group"><label for="form16">Email</label> <input type="email" name="signinEmail"
+                                                                                         class="form-control"
+                                                                                         id="form16"
+                                                                                         placeholder="vision2go@gmail.com"
+                                                                                         required></div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6"><label for="form19">Password</label> <input type="password"
+                                                                                                         name="signinPassword"
+                                                                                                         class="form-control"
+                                                                                                         id="form19"
+                                                                                                         placeholder="••••••••"
+                                                                                                         required></div>
+                            <!--<div class="form-group col-md-6"> <label for="form20">Confirm Password</label> <input type="password" class="form-control" id="form20" placeholder="••••"> </div>-->
+                        </div>
+                        <!--<div class="form-group">
+                          <div class="form-check"> <input class="form-check-input" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21"> I Agree with <a href="#" class="text-danger">Term and Conditions</a> of the service </label> </div>
+                        </div> -->
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 <% } else { %>
-  <div class="py-2">
-    <div class="row">
-      <div class="col-md-5 text-center"><a class="btn text-center btn-warning border border-success" href="/mytours">Go to your own tours</a></div>
-      <hr>
-      <!--<div class="col-md-2 text-center">
-        <h4 class="text-light my-2 text-center">OR</h4>
-      </div>-->
-      <div class="col-md-5 text-center"><a class="btn text-center btn-warning border border-success" href="/createnewtour">Creat a new tour</a></div>
+    <div class="py-2">
+        <div class="row">
+            <div class="col-md-5 text-center"><a class="btn text-center btn-warning border border-success"
+                                                 href="/mytours">Go to your own tours</a></div>
+            <hr>
+            <!--<div class="col-md-2 text-center">
+              <h4 class="text-light my-2 text-center">OR</h4>
+            </div>-->
+            <div class="col-md-5 text-center"><a class="btn text-center btn-warning border border-success"
+                                                 href="/createnewtour">Creat a new tour</a></div>
+        </div>
     </div>
-  </div>
 <% } %>
 
 <%- include('partials/map') %>
+
+<div class="bg-dark py-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a class="weatherwidget-io" href="https://forecast7.com/en/51d517d47/dortmund/" data-label_1="DORTMUND"
+                   data-label_2="WEATHER" data-font="Verdana" data-icons="Climacons Animated" data-days="3"
+                   data-theme="weather_one">DORTMUND WEATHER</a>
+            </div>
+            <script>
+                !function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (!d.getElementById(id)) {
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = 'https://weatherwidget.io/js/widget.min.js';
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }
+                }(document, 'script', 'weatherwidget-io-js');
+            </script>
+        </div>
+    </div>
+</div>
+
 <%- include('partials/footer') %>
