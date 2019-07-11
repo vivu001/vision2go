@@ -212,7 +212,7 @@ module.exports = function (app, passport) {
         addedPlaces.forEach((place) => {
             const placeToModel = placeModel({
                 name: place.name, lat: place.lat, lng: place.lng,
-                type: place.type, placeImageURL: place.image
+                type: place.type, placeImageURL: place.image, description: place.description
             });
             tourPlaces.push(placeToModel);
         });

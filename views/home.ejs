@@ -12,12 +12,12 @@
         </div>
     </div>
 </div>
-<div class="py-3">
+<div class="py-2">
     <div class="container">
         <div class="row">
             <div id="dortmundInfo" class="text-center mx-auto col-md-8">
                 <h1 class="mb-3 text-warning">Most popular tours</h1>
-                <p class="lead text-info justify-content-center text-justify">Dortmund, the largest city in Westphalia, lies
+                <p class="text-info text-justify">Dortmund, the largest city in Westphalia, lies
                     on the eastern edge of the Ruhr in the fertile Hellweg area. The city has long been the center of
                     Germany's coal and steel industries, a heritage that's celebrated in a variety of excellent museums
                     and attractions. Despite the importance of industry to the city, visitors are drawn here by its
@@ -51,7 +51,7 @@
                         </div>
                         <div class="card-body">
                             <h4 class="card-title"><%= tour.name %></h4>
-                            <p class="card-text"><%= tour.review %></p>
+                            <p class="card-text text-justify"><%= tour.review %></p>
                             <a href="/mytours/<%= tour.name %>" class="btn btn-primary">Let's discover</a>
                         </div>
                     </div>

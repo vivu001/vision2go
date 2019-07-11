@@ -13,7 +13,6 @@ $('#savePlace').click(() => {
             image: $("#placeImage").val(),
             description: $("#placeDescription").val()
         };
-
         alert("Successfully added: " + newPlace.name);
 
         addedPlaces.push(newPlace);
@@ -56,5 +55,7 @@ function modalReset() {
     $("#lat").val('');
     $("#lng").val('');
     $("#placeType").val('');
+    $("#placeImage").val('');
+    $("#placeDescription").val('');
 }
 
