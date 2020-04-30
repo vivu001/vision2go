@@ -13,7 +13,7 @@
     "ejs": "latest",
     "express": "latest",
     "express-session": "^1.16.1",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "make-promises-safe": "^5.0.0",
     "memjs": "^1.2.0",
     "mongoose": "^5.5.2",
